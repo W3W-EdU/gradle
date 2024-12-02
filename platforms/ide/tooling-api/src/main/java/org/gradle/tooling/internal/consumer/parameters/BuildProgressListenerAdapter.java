@@ -1004,7 +1004,7 @@ public class BuildProgressListenerAdapter implements InternalBuildProgressListen
     }
 
     private static AdditionalData toAdditionalData(InternalAdditionalData additionalData) {
-        return new DefaultAdditionalData(additionalData.getAsMap(), null);
+        return new DefaultAdditionalData(additionalData.getAsMap(), additionalData.get());
     }
 
     @Nullable
