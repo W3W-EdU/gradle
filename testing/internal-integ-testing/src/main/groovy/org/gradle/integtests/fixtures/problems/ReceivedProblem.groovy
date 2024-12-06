@@ -400,10 +400,10 @@ class ReceivedProblem implements Problem {
                 }
             }
         }
-//
-//        Map<String, Object> getAsMap() {
-//            data
-//        }
+
+        Map<String, Object> getAsMap() {
+            data
+        }
 //
 //        @Override
 //        Object get() {
