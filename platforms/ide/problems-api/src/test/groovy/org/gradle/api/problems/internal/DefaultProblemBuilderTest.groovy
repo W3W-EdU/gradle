@@ -114,7 +114,7 @@ class DefaultProblemBuilderTest extends Specification {
 
     def "can define contextual locations"() {
         given:
-        def problemBuilder = new DefaultProblemBuilder(EMPTY_STREAM, new AdditionalDataBuilderFactory())
+        def problemBuilder = new DefaultProblemBuilder(EMPTY_STREAM, new DefaultAdditionalDataBuilderFactory())
 
         when:
         //noinspection GroovyAssignabilityCheck

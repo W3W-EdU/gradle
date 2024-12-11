@@ -30,7 +30,6 @@ import org.gradle.tooling.events.problems.LineInFileLocation
 import org.gradle.tooling.events.problems.Problem
 import org.gradle.tooling.events.problems.Severity
 import org.gradle.tooling.events.problems.SingleProblemEvent
-import org.gradle.tooling.events.problems.TaskPathLocation
 import org.gradle.tooling.events.problems.internal.DefaultAdditionalData
 import org.gradle.util.GradleVersion
 import org.junit.Assume
