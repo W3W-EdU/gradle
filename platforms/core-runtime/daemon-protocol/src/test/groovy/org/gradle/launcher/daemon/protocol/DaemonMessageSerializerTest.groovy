@@ -18,6 +18,7 @@ package org.gradle.launcher.daemon.protocol
 
 import org.gradle.api.internal.StartParameterInternal
 import org.gradle.api.logging.LogLevel
+import org.gradle.api.problems.internal.DefaultGeneralData
 import org.gradle.configuration.GradleLauncherMetaData
 import org.gradle.internal.classpath.ClassPath
 import org.gradle.internal.invocation.BuildAction
@@ -50,6 +51,14 @@ class DaemonMessageSerializerTest extends SerializerSpec {
         def result = serialize(event, serializer)
         result instanceof BuildEvent
         result.payload == ["a", "b", "c"]
+    }
+
+    def "can serialize BuildEvent messages with AdditionalData"() {
+        expect:
+        def event = new BuildEvent(Arrays.asList(new DefaultGeneralData(["sdf": "sdf"])))
+        def result = serialize(event, serializer)
+        result instanceof BuildEvent
+        result.payload[0].asMap == ["sdf": "sdf"]
     }
 
     def "can serialize LogLevelChangeEvent messages"() {
