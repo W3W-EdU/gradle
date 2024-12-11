@@ -149,16 +149,16 @@ class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
 
                 static AdditionalDataBuilder<SomeData> builder(SomeData from) {
                     if(from == null) {
-                        return new SomeDataBuilder();
+                        return new SomeDataBuilder()
                     }
-                    return new SomeDataBuilder(from);
+                    return new SomeDataBuilder(from)
                 }
 
                 private static class SomeDataBuilder implements SomeDataSpec, AdditionalDataBuilder<SomeData> {
-                    private String typeName;
+                    private String typeName
 
                     SomeDataBuilder(SomeData from) {
-                        this.typeName = from.getTypeName();
+                        this.typeName = from.getTypeName()
                     }
 
                     SomeDataBuilder() {
@@ -166,13 +166,13 @@ class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
 
                     @Override
                     SomeDataSpec typeName(String typeName){
-                        this.typeName = typeName;
-                        return this;
+                        this.typeName = typeName
+                        return this
                     }
 
                     @Override
                     SomeData build() {
-                        return new SomeData(typeName);
+                        return new SomeData(typeName)
                     }
                 }
             }
