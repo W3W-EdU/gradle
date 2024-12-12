@@ -16,7 +16,7 @@
 
 package org.gradle.internal.cc.impl
 
-
+import org.gradle.api.problems.internal.GeneralData
 import org.gradle.integtests.tooling.fixture.TargetGradleVersion
 import org.gradle.integtests.tooling.fixture.ToolingApiSpecification
 import org.gradle.integtests.tooling.fixture.ToolingApiVersion
@@ -85,7 +85,7 @@ class ConfigurationCacheProblemsTapi813PlusCrossVersionTest extends ToolingApiSp
             definition.severity == Severity.ERROR
             (originLocations[0] as LineInFileLocation).path == "build file 'build.gradle'" // FIXME: the path should not contain a prefix nor extra quotes
             (originLocations[1] as LineInFileLocation).path == "build file '$buildFile.path'"
-//            additionalData instanceof GeneralData
+            additionalData.get() instanceof GeneralData
             additionalData.asMap.isEmpty()
         }
     }
