@@ -42,8 +42,6 @@ import static org.gradle.integtests.fixtures.AvailableJavaHomes.getJdk8
 import static org.gradle.integtests.tooling.r86.ProblemProgressEventCrossVersionTest.getProblemReportTaskString
 import static org.gradle.integtests.tooling.r86.ProblemsServiceModelBuilderCrossVersionTest.getBuildScriptSampleContent
 
-//import org.gradle.tooling.events.problems.internal.GeneralData
-
 @ToolingApiVersion(">=8.13")
 @TargetGradleVersion(">=8.9")
 class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
@@ -219,7 +217,6 @@ class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
         def listener = new ProblemProgressListener()
         withConnection { connection ->
             connection.newBuild().forTasks('reportProblem')
-//                .addJvmArguments("-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=5006")
                 .addProgressListener(listener)
                 .run()
         }

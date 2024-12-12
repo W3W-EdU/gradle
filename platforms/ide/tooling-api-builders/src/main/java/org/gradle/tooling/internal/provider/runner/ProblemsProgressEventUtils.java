@@ -68,10 +68,11 @@ import org.gradle.tooling.internal.protocol.problem.InternalLocation;
 import org.gradle.tooling.internal.protocol.problem.InternalSeverity;
 import org.gradle.tooling.internal.protocol.problem.InternalSolution;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -218,8 +219,7 @@ public class ProblemsProgressEventUtils {
             DeprecationData data = (DeprecationData) additionalData;
             return new DefaultAdditionalData(ImmutableMap.of("type", data.getType().name()), null);
         } else if (additionalData instanceof TypeValidationData) {
-//            TypeValidationData data = (TypeValidationData) additionalData;
-            return new DefaultAdditionalData(ImmutableMap.of(), additionalData);
+            return toInternalAdditionalData((TypeValidationData) additionalData);
         } else if (additionalData instanceof GeneralData) {
             GeneralData data = (GeneralData) additionalData;
             return new DefaultAdditionalData(
@@ -229,8 +229,18 @@ public class ProblemsProgressEventUtils {
                 data
             );
         } else {
-            return new DefaultAdditionalData(Collections.emptyMap(), additionalData);
+            return new DefaultAdditionalData(ImmutableMap.of(), additionalData);
         }
+    }
+
+    @Nonnull
+    private static DefaultAdditionalData toInternalAdditionalData(TypeValidationData data) {
+        ImmutableMap.Builder<String, Object> builder = ImmutableMap.builder();
+        Optional.ofNullable(data.getPluginId()).ifPresent(pluginId -> builder.put("pluginId", pluginId));
+        Optional.ofNullable(data.getPropertyName()).ifPresent(propertyName -> builder.put("propertyName", propertyName));
+        Optional.ofNullable(data.getParentPropertyName()).ifPresent(parentPropertyName -> builder.put("parentPropertyName", parentPropertyName));
+        Optional.ofNullable(data.getTypeName()).ifPresent(typeName -> builder.put("typeName", typeName));
+        return new DefaultAdditionalData(builder.build(), data);
     }
 
     private static boolean isSupportedType(Object type) {
