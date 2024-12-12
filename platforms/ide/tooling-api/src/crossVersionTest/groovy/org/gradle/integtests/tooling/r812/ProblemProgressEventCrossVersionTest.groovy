@@ -43,7 +43,6 @@ import static org.gradle.integtests.tooling.r86.ProblemsServiceModelBuilderCross
 @TargetGradleVersion(">=8.9")
 class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
 
-
     def withReportProblemTask(@GroovyBuildScriptLanguage String taskActionMethodBody) {
         buildFile getProblemReportTaskString(taskActionMethodBody)
     }
@@ -117,7 +116,6 @@ class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
         verifyAll(problems[0]) {
             details?.details == expectedDetails
             definition.documentationLink?.url == expectedDocumentation
-            locations.size() >= 2
             (locations[0] as LineInFileLocation).path == '/tmp/foo'
             (locations[1] as LineInFileLocation).path == "build file '$buildFile.path'"
             definition.severity == Severity.WARNING
@@ -262,7 +260,7 @@ class ProblemProgressEventCrossVersionTest extends ToolingApiSpecification {
         then:
         thrown(BuildException)
         listener.problems.size() == 1
-        def gd = (listener.problems[0].additionalData)
+        def gd = listener.problems[0].additionalData
         gd.asMap['typeName'] == 'MyTask'
     }
 
