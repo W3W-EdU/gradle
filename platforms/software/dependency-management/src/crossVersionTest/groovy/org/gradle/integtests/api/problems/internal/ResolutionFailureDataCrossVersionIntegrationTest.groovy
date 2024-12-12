@@ -35,7 +35,7 @@ import org.gradle.tooling.events.problems.internal.DefaultAdditionalData
 @ToolingApiVersion(">=8.11")
 class ResolutionFailureDataCrossVersionIntegrationTest extends ToolingApiSpecification {
     @ToolingApiVersion(">=8.11 <8.12")
-    def "can supply ResolutionFailureData  (Tooling API client [8.11,8.12)"() {
+    def "can supply ResolutionFailureData (Tooling API client [8.11,8.12)"() {
         given:
         withReportProblemTask """
             TestResolutionFailure failure = new TestResolutionFailure()
@@ -60,7 +60,7 @@ class ResolutionFailureDataCrossVersionIntegrationTest extends ToolingApiSpecifi
         }
     }
 
-    @ToolingApiVersion(">=8.12")
+    @ToolingApiVersion(">=8.13")
     def "can supply ResolutionFailureData (Tooling API client >= 8.12)"() {
         given:
         withReportProblemTask """
@@ -103,7 +103,7 @@ class ResolutionFailureDataCrossVersionIntegrationTest extends ToolingApiSpecifi
             import org.gradle.api.problems.internal.ResolutionFailureDataSpec
             import org.gradle.internal.component.resolution.failure.interfaces.ResolutionFailure
 
-            class TestResolutionFailure implements ResolutionFailure {
+            class TestResolutionFailure implements ResolutionFailure, Serializable {
                 @Override
                 public String describeRequestTarget() {
                     return "test failure";
