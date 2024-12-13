@@ -33,7 +33,6 @@ import gradlebuild.basics.performanceTestVerbose
 import gradlebuild.basics.propertiesForPerformanceDb
 import gradlebuild.basics.releasedVersionsFile
 import gradlebuild.basics.repoRoot
-import gradlebuild.basics.toLowerCase
 import gradlebuild.basics.toolchainInstallationPaths
 import gradlebuild.integrationtests.addDependenciesAndConfigurations
 import gradlebuild.integrationtests.ide.AndroidStudioProvisioningExtension
@@ -413,7 +412,7 @@ class PerformanceTestExtension(
             }
         )
 
-        val channelSuffix = if (OperatingSystem.current().isLinux) "" else "-${OperatingSystem.current().familyName.toLowerCase()}"
+        val channelSuffix = if (OperatingSystem.current().isLinux) "" else "-${OperatingSystem.current().familyName.lowercase()}"
 
         registeredPerformanceTests.add(
             createPerformanceTest("${testProject}PerformanceTest", generatorTask) {
